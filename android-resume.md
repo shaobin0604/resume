@@ -1,7 +1,5 @@
 # 邵彬 Android 架构师/技术专家
 
-标签（空格分隔）： 未分类
-
 ---
 
 # 联系方式
@@ -21,7 +19,6 @@
 - GitHub: [http://github.com/shaobin0604][github]
 - Stackoverflow id: shaobin0604
 - 期望职位：Android 架构师/技术专家/团队技术负责人
-- 期望薪资：税前月薪 35k，特别喜欢的公司可例外
 - 期望城市：成都
 
 ---
@@ -30,38 +27,13 @@
 
 ## 成都运力科技有限公司 2015 年 9 月至今
 
-### 插件框架 Phantom， 2016 年 8 月立项，2017 年 1 月投入到生产环境
+### 插件框架 Phantom
 
-#### 功能完备
+2016 年 8 月立项，2017 年 1 月投入到生产环境，2018 年 10 开源，详见 [Phantom 项目介绍][Phantom]
 
-1. 四大组件中的 Activity/Service/Receiver ，均不需要在宿主 Activity 中声明
-2. 宿主 Fragment 嵌入插件提供的 View
-3. 插件中的本地库 so
-4. 插件与宿主互相调用
-5. 使用第三方 SDK（微信、支付宝、环信、高德地图）
-6. 宿主和插件完全隔离，可以使用相同的类，不会冲突
-7. 插件支持混淆
-8. 插件热更新，无需重启宿主
-9. 数据监控（稳定性，性能）
+### 监控系统
 
-#### 兼容性
-
-1. 4.0 ~ 10.0
-2. 国内 MOD，如：Miui, FlyMe, Vivo, Oppo, 华为, 联想，YunOS
-3. 极少的 Binder Hook，目前仅仅 hook 了一个 Binder：AMS
-
-#### 入侵性极低
-
-1. 插件开发等同于原生开发，四大组件无需继承特定的基类
-2. 插件调试等同于原生调试
-3. 若需要与宿主通讯，仅需要 provided 依赖一个用于通讯的 module
-
-#### VS 之前使用的 Apkplug 插件框架
-
-1. SDK 初始化耗时减少 10 倍
-2. 插件启动成功率 95% -> 99.9%
-3. 插件启动耗时减少 1 倍
-4. 对于未知机型上的兼容性问题可以很快解决
+TODO
 
 ### 页面统一跳转协议
 
@@ -77,6 +49,10 @@
 - 支持外部应用 deeplink 跳转
 - 动态配置跳转目标，可做为 hotfix 的一个实现方案
 
+### 客户端升级
+
+TODO
+
 ### 表单模板引擎
 
 根据服务端配置的表单，在 Android 端动态生成表单界面。只需要在服务端配置好表单，服务端与客户端均不需要编码，大大减少了业务系统中涉及表单的功能模块（例如：新车、二手车售卖等模块）开发工作量。
@@ -87,21 +63,24 @@
   - 渲染引擎
   - 数据绑定
 
-### 开发/发布环境基础设施
-
-主导 Android 团队开发/发布环境基础设施建设
+### 研发工程化基础设施建设
 
 #### 代码管理
 
-基于 Gerrit + repo ，参考 AOSP 源码管理方式，功能模块代码存放在独立 git 仓库中，方便在各个产品中复用。
+- 基于 Gerrit/Gitlab + repo ，参考 AOSP 源码管理方式，功能模块代码存放在独立 git 仓库中，方便在各个产品中复用。
+- 基础库二进制包发布到内部 maven 仓库
+
+#### 代码 Review
+
+- Gerrit -> Reviewboard -> Gitlab Merge Request
 
 #### 构建系统
 
-基于 Gradle 的构建系统，通过 product flavor + build type + build parameter 实现编译多种版本：
+基于 Gradle 的构建系统，通过 Product Flavor + Build Type + Build Parameter 实现编译多种版本：
 
 - 测试环境/生产环境
-- 插件依赖版本
-- 特殊定制版本（包名、主题皮肤）
+- 集成的各基础库/各插件版本
+- 特殊定制版本（包名、主题皮肤、自动化测试包）
 
 #### 持续集成
 
@@ -112,14 +91,21 @@
 - 应用加固
 - 代码质量检查（lint, pmd, findbugs, checkstyle）
 - 跟踪包大小，方法数
+- 自定义集成的各基础库/各插件版本
 
-#### 签名服务
+#### Release 签名服务
 
-release 签名 keystore 存放在服务器，杜绝 keystore 泄漏的风险。
+使用远程签名服务替换本地签名机制，杜绝 Keystore 泄漏的风险，提供
 
-#### 多渠道打包
+1. 测试同学使用的 Web UI
+2. 程序集成的 Web Service 接口
 
-基于腾讯 VasDolly 的渠道包打包控制台， 无需开发，测试参与，运营可直接使用打包用于发布各个应用市场的渠道包。
+#### 多渠道打包服务
+
+基于腾讯 VasDolly 的快速多渠道打包服务，支持 v1/v2 签名，提供
+
+1. 运营使用的 Web UI
+2. 程序集成的 Web Service 接口
 
 #### 研发管理
 
@@ -140,10 +126,8 @@ release 签名 keystore 存放在服务器，杜绝 keystore 泄漏的风险。
 
 ### 海豚浏览器旋风版
 
-- 下载模块优化。支持多线程分块下载，下载速度提升 30% ~ 50% 。该下载模块同时也在应用
-市场和视频聚合应用中使用
-- 主题商城模块。支持在线下载主题/皮肤/字体；管理本地安装的主题/皮肤/字
-体；
+- 下载模块优化。支持多线程分块下载，下载速度提升 30% ~ 50% 。该下载模块同时也在应用商店和视频聚合应用中使用。
+- 主题商城模块。支持在线下载主题/皮肤/字体；管理本地安装的主题/皮肤/字体；
 
 ### Android 锁屏应用 - One Locker
 
@@ -174,29 +158,24 @@ release 签名 keystore 存放在服务器，杜绝 keystore 泄漏的风险。
 
 ## 北京京联云软件有限公司 2010 年 5 月 ~ 2013 年 5 月
 
-- 带领组员完成基于 AOSP 4.2.2 的 ROM 项目（类似于 MIUI、乐蛙）内置应用
-程序开发:备份、记事本、手电筒、指南针、文件管理器，录音机、时钟。
-- 中移动定制 Android 手机 PC 套件（类似于：豌豆荚、QQ 手机管家）
+- 带领组员完成基于 AOSP 4.2.2 的 ROM 项目（类似于 MIUI、乐蛙）内置应用程序开发:备份、记事本、手电筒、指南针、文件管理器，录音机、时钟。
+- 中移动定制 Android 手机 PC 套件（类似于：豌豆荚、QQ 手机管家）。
 - 完整的参与过以下运营商定制手机项目：天语 W606，华为 T8100, 联想 A30T，华为 T8808D，联想 S899t。
-- 独立完成中移动 CMMB 手机电视客户端。产品通过中移动运营商测试，目前已有多款上
-市手机使用该产品，如：华为 T8100, 联想 A30T。
+- 独立完成中移动 CMMB 手机电视客户端。产品通过中移动运营商测试，目前已有多款上市手机使用该产品，如：华为 T8100, 联想 A30T。
 - 3G-324M 视频通话，集成多媒体模块和协议栈模块。
 - 多款手机预置应用，如：农历、英汉双解词典、背单词、天气预报。
 - Intel Android 2.2 项目，解决 Camera/Multimedia 应用层和框架层的 BUG。
 
 ## 云电同方科技有限公司 2008 年 3 月 ~ 2009 年 8 月
 
-- 云南电网电力营销管理信息系统(PMS 3.0)客户端功能模块开发并参与玉溪供电
-局实施工作。
-- 全面业务整合平台(TBI)。该平台整合省电网公司各信息系统的数据资源，提供
-统一的数据服务接口。
+- 云南电网电力营销管理信息系统(PMS 3.0)客户端功能模块开发并参与玉溪供电局实施工作。
+- 全面业务整合平台(TBI)。该平台整合省电网公司各信息系统的数据资源，提供统一的数据服务接口。
 - 昆明供电局营销监控系统。
 - 昆明供电局 VIP 客户服务系统。
 
 ## IBM 中国软件开发中心 2007 年 7 月 ~ 2008 年 1 月
 
-- 参与 ClearCase 和 ClearQuest 的两个 Patch 版本 7.0.0.2/7.0.1.1 的系统测试
-工作。
+- 参与 ClearCase 和 ClearQuest 的两个 Patch 版本 7.0.0.2/7.0.1.1 的系统测试工作。
 
 ---
 
@@ -204,8 +183,8 @@ release 签名 keystore 存放在服务器，杜绝 keystore 泄漏的风险。
 
 ## 项目
 
-- [InternetRadio SDK for Android](http://www.cnblogs.com/shaobin0604/archive/2012/12/02/Release-InternetRadio-SDK-for-Android.html) - 用于播放网络流媒体音频的多媒体 SDK 组
-件
+- [Phantom][Phantom] - 零 Hook 稳定占坑类 Android 热更新插件化方案
+- [InternetRadio SDK for Android](http://www.cnblogs.com/shaobin0604/archive/2012/12/02/Release-InternetRadio-SDK-for-Android.html) - 用于播放网络流媒体音频的多媒体 SDK 组件
 - [HeartbeatFixerForGCM](https://github.com/shaobin0604/HeartbeatFixerForGCM) - 用于解决 GCM 推送延迟问题的小工具
 - [Call Vibrator](https://github.com/shaobin0604/CallVibrator) - 类似于 MIUI 系统提供的电话接通/挂断/等待震动功能
 
@@ -223,8 +202,8 @@ release 签名 keystore 存放在服务器，杜绝 keystore 泄漏的风险。
 ## 曾经使用的技能
 
 - 移动设备开发：JAVA ME
-- Web 开发：Java/Ruby
-- Web 框架：Struts/Spring/iBatis/Hibernate/RoR/Sinatra
+- Web 开发：Java/Ruby/Python
+- Web 框架：Struts/Spring/iBatis/Hibernate/RoR/Sinatra/Flask
 - 数据库相关：MySQL
 - 搜索：Lucene
 
@@ -239,3 +218,4 @@ release 签名 keystore 存放在服务器，杜绝 keystore 泄漏的风险。
 [bitbucket]: http://www.bitbucket.org/shaobin0604
 [oschina]: http://git.oschina.net/shaobin0604
 [googleplay]: https://play.google.com/store/apps/developer?id=MoboDev
+[Phantom]: https://github.com/ManbangGroup/Phantom
