@@ -19,13 +19,7 @@
 * GitHub: [http://github.com/shaobin0604](http://www.github.com/shaobin0604)
 * Stack Overflow: shaobin0604
 * 期望职位：Android 技术专家/架构师
-* 期望城市：成都
-
-- - -
-
-# 自我综述
-
-TODO:
+* 期望城市：成都 
 
 - - -
 
@@ -44,7 +38,7 @@ Android 架构组技术负责人
 
 从 0 到 1 搭建 Android 端基础设施，主导以下几方面工作：
 
-* 确定技术演进大方向：组件化，插件化，Flutter
+* 规划技术演进大方向：组件化，插件化，Flutter
 * 制定研发流程规范：编码规范，代码提交规范，Code Review，宿主插件集成
 * 基础组件建设：插件框架，页面路由框架，表单引擎，宿主/插件升级
 * 自动化建设：基于 Jenkins 的持续集成，Release 签名平台，极速多渠道打包平台
@@ -53,7 +47,7 @@ Android 架构组技术负责人
 
 ### 插件框架 Phantom （2016 年 8 月至今）
 
-主导 Android 插件框架 Phantom 核心以及配套基础设施的设计及研发工作。
+主导公司 Android 插件框架 Phantom 核心以及配套基础设施的设计及研发工作。
 
 #### 项目简介
 
